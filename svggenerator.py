@@ -14,6 +14,11 @@ line_style = {'fill': 'none', 'stroke': 'black', 'stroke-width': 0, 'stroke-line
 
 
 def generate(glyph: Glyph, metadata: Metadata):
+    """Uses the glyph and the metadata to create the SVGs.
+
+    The subfolder is the font name.
+    The SVG name contains the metadata necessary to import the glyph to the font.
+    """
     print(f'Generating character \'{metadata.character}\' for font {metadata.font_name}')
 
     # Assumes font folder already exists
@@ -61,5 +66,4 @@ def _map_to_svg(x):
     # Scale proportionally (* svg_size / (base - cap))
     # Guard to avoid going out of bounds after stroking the character
     # Offset, since the SVG starts at zero (+ svg_size / 2)
-    # Round because the font should only contain integers
     return x * (svg_size - 2 * guard) / (base - cap) + svg_size / 2
